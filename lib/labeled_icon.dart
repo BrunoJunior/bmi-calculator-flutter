@@ -20,7 +20,7 @@ class LabeledIcon extends StatelessWidget {
           size: 80,
         ),
         Padding(
-          padding: EdgeInsets.only(top: 15.0),
+          padding: EdgeInsets.only(top: 10),
           child: Text(
             label,
             style: labelStyle,
