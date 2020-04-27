@@ -10,28 +10,20 @@ enum Gender {
   female,
 }
 
-class GenderSelector extends StatefulWidget {
+class GenderSelector extends StatelessWidget {
   final Function(Gender) onSelect;
-
-  GenderSelector({this.onSelect});
-
-  @override
-  _GenderSelectorState createState() => _GenderSelectorState();
-}
-
-class _GenderSelectorState extends State<GenderSelector> {
-  Gender activeGender;
+  final Gender selectedGender;
+  GenderSelector({@required this.selectedGender, this.onSelect});
 
   getColour(Gender gender) =>
-      gender == activeGender ? kActiveCardColor : kInactiveCardColor;
+      gender == selectedGender ? kActiveCardColor : kInactiveCardColor;
 
   select(Gender gender) {
-    if (activeGender == gender) {
+    if (selectedGender == gender) {
       return;
     }
-    setState(() => activeGender = gender);
-    if (widget.onSelect != null) {
-      widget.onSelect(activeGender);
+    if (onSelect != null) {
+      onSelect(gender);
     }
   }
 

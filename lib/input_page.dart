@@ -26,9 +26,11 @@ class _InputPageState extends State<InputPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-              child: GenderSelector(
-            onSelect: (gender) => selectedGender = gender,
-          )),
+            child: GenderSelector(
+              selectedGender: selectedGender,
+              onSelect: (gender) => setState(() => selectedGender = gender),
+            ),
+          ),
           Expanded(
             child: ReusableCard(
               colour: kActiveCardColor,
