@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -10,15 +11,9 @@ enum Gender {
 }
 
 class GenderSelector extends StatefulWidget {
-  final Color inactiveColour;
-  final Color activeColour;
   final Function(Gender) onSelect;
 
-  GenderSelector({
-    @required this.activeColour,
-    @required this.inactiveColour,
-    this.onSelect,
-  });
+  GenderSelector({this.onSelect});
 
   @override
   _GenderSelectorState createState() => _GenderSelectorState();
@@ -28,7 +23,7 @@ class _GenderSelectorState extends State<GenderSelector> {
   Gender activeGender;
 
   getColour(Gender gender) =>
-      gender == activeGender ? widget.activeColour : widget.inactiveColour;
+      gender == activeGender ? kActiveCardColor : kInactiveCardColor;
 
   select(Gender gender) {
     if (activeGender == gender) {

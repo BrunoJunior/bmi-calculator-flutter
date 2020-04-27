@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-const labelStyle = TextStyle(
-  fontSize: 18,
-  color: Color(0xFF8D8E98),
-);
+import 'constants.dart';
 
 class LabeledIcon extends StatelessWidget {
   final String label;
@@ -23,7 +20,7 @@ class LabeledIcon extends StatelessWidget {
           padding: EdgeInsets.only(top: 10),
           child: Text(
             label,
-            style: labelStyle,
+            style: kLabelStyle,
           ),
         ),
       ],
