@@ -1,10 +1,12 @@
-import 'package:bmi_calculator/gender_selector.dart';
-import 'package:bmi_calculator/value_card.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:bmi_calculator/classes/personal_info.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/gender_selector.dart';
+import 'package:bmi_calculator/components/value_card.dart';
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
-import 'reusable_card.dart';
+import '../components/reusable_card.dart';
+import '../constants.dart';
+import 'results_page.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -12,10 +14,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  int height = 180;
-  int weight = 80;
-  int age = 20;
-  Gender selectedGender;
+  PersonalInfo info = PersonalInfo();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +26,8 @@ class _InputPageState extends State<InputPage> {
         children: <Widget>[
           Expanded(
             child: GenderSelector(
-              selectedGender: selectedGender,
-              onSelect: (gender) => setState(() => selectedGender = gender),
+              selectedGender: info.gender,
+              onSelect: (gender) => setState(() => info.gender = gender),
             ),
           ),
           Expanded(
@@ -47,7 +46,7 @@ class _InputPageState extends State<InputPage> {
                     textBaseline: TextBaseline.alphabetic,
                     children: <Widget>[
                       Text(
-                        height.toString(),
+                        info.height.toString(),
                         style: kHeightStyle,
                       ),
                       Text(
@@ -59,9 +58,9 @@ class _InputPageState extends State<InputPage> {
                   Slider(
                     min: 120,
                     max: 240,
-                    value: height.toDouble(),
+                    value: info.height.toDouble(),
                     onChanged: (value) =>
-                        setState(() => height = value.round()),
+                        setState(() => info.height = value.round()),
                     activeColor: kBottomColor,
                     inactiveColor: kInactiveCardColor,
                   ),
@@ -74,32 +73,37 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ValueCard(
-                    value: weight,
+                    value: info.weight,
                     title: 'WEIGHT',
                     unit: 'kg',
                     onChanged: (value) => setState(
-                      () => weight = value,
+                      () => info.weight = value,
                     ),
                   ),
                 ),
                 Expanded(
                   child: ValueCard(
-                    value: age,
+                    value: info.age,
                     title: 'AGE',
                     onChanged: (value) => setState(
-                      () => age = value,
+                      () => info.age = value,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 20),
-            width: double.infinity,
-            height: kBottomHeight,
-            color: kBottomColor,
-          )
+          BottomButton(
+            text: 'CALCULATE',
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResultsPage(
+                  info: info,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

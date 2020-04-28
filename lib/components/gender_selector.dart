@@ -5,11 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'labeled_icon.dart';
 import 'reusable_card.dart';
 
-enum Gender {
-  male,
-  female,
-}
-
 class GenderSelector extends StatelessWidget {
   final Function(Gender) onSelect;
   final Gender selectedGender;
